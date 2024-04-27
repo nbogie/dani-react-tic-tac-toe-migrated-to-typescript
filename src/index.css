@@ -23,6 +23,7 @@
     aspect-ratio: 1;
     display: grid;
     place-items: center;
+    user-select: none;
 }
 
 button {
@@ -60,7 +61,7 @@ button {
 }
 
 .winner {
-    font-size: 10rem;
+    font-size: 5rem;
 }
 
 .draw {

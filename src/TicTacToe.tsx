@@ -1,5 +1,5 @@
-//Disable buttons on game over
 //TODO: highlight the win cells
+//Done: Disable buttons on game over
 
 import { useState } from "react";
 import "./index.css";
@@ -29,6 +29,10 @@ export default function TicTacToe() {
     }
 
     function handleClickCell(cellIndex: number) {
+        if (calculateWinState(boardState).outcome !== "in-play") {
+            return;
+        }
+
         const copyOfBoardState = [...boardState]; // shallow copy the current array of the board state
 
         if (copyOfBoardState[cellIndex] === null) {
