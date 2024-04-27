@@ -26,50 +26,33 @@ export default function TicTacToe() {
     }
 
     function createGridCellDivs(inputArray: BoardState): JSX.Element[] {
-        const arrayOfDivs = inputArray.map((cellState, index) => {
-            // onClick console.logs the index of the element that is clicked
-
-            if (cellState === "x") {
-                return (
-                    <div
-                        className="cell"
-                        key={index}
-                        onClick={() => handleClickCell(index)}
-                    >
-                        ✖️
-                    </div>
-                ); // 'x'
-            } else if (cellState === "o") {
-                return (
-                    <div
-                        className="cell"
-                        key={index}
-                        onClick={() => handleClickCell(index)}
-                    >
-                        ⭕
-                    </div>
-                ); // 'o'
-            } else {
-                return (
-                    <div
-                        className="cell"
-                        key={index}
-                        onClick={() => handleClickCell(index)}
-                    ></div>
-                ); //null
-            }
+        const arrayOfDivs = inputArray.map((cellState, cellIndex) => {
+            return (
+                <div
+                    key={cellIndex}
+                    className="cell"
+                    onClick={() => handleClickCell(cellIndex)}
+                >
+                    {emojiForCellState(cellState)}
+                </div>
+            );
         });
         return arrayOfDivs;
     }
 
-    function handleClickCell(index: number) {
+    function emojiForCellState(cellState: CellState): string {
+        const lookup = { x: "🏴‍☠️", o: "😇" };
+        return cellState === null ? "" : lookup[cellState];
+    }
+
+    function handleClickCell(cellIndex: number) {
         const copyOfBoardState = [...boardState]; // shallow copy the current array of the board state
 
-        if (copyOfBoardState[index] === null) {
-            copyOfBoardState[index] = whoseTurnIsIt();
+        if (copyOfBoardState[cellIndex] === null) {
+            copyOfBoardState[cellIndex] = whoseTurnIsIt();
             setBoardState(copyOfBoardState); // update state with copy of array if the cell is null
         } else {
-            console.log(index, " is not null");
+            console.log(cellIndex, " is not null");
         }
     }
 
