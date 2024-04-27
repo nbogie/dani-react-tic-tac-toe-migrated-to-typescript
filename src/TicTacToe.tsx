@@ -25,7 +25,7 @@ export default function TicTacToe() {
         }
     }
 
-    function createGridCellDivs(inputArray: BoardState) {
+    function createGridCellDivs(inputArray: BoardState): JSX.Element[] {
         const arrayOfDivs = inputArray.map((cellState, index) => {
             // onClick console.logs the index of the element that is clicked
 
