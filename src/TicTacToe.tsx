@@ -91,7 +91,7 @@ export default function TicTacToe() {
 
     return (
         <div className="gameContainer">
-            <div className="gameState">
+            <div className="gameGrid">
                 {isGameOver && (
                     <div className="gameOver">
                         {winState.outcome === "draw" ? (
@@ -101,8 +101,8 @@ export default function TicTacToe() {
                         )}
                     </div>
                 )}
+                {createGridCellDivs(boardState)}
             </div>
-            <div className="gameGrid">{createGridCellDivs(boardState)}</div>
             <div className="resetButton">
                 <button onClick={resetBoardState}>reset</button>
             </div>
