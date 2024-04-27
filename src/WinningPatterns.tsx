@@ -1,7 +1,7 @@
 import { BoardState } from "./TicTacToe";
 
 /**
- * array of tuples of three board indices, each describing a row
+ * array of tuples of three board indices, each describing a line on the board
  */
 const winningPatterns: [number, number, number][] = [
     [0, 1, 2],
@@ -14,11 +14,12 @@ const winningPatterns: [number, number, number][] = [
     [2, 4, 6], // Diagonals
 ];
 
-/**
- * @param {('x' | 'o' | null)[]} board
- * @returns {{outcome: 'draw' | 'in-play'} | {outcome: 'win', winner: 'x' | 'o'}}
- */
-export default function checkWinner(board: BoardState) {
+export type WinState =
+    | { outcome: "draw" }
+    | { outcome: "in-play" }
+    | { outcome: "win"; winner: "x" | "o" };
+
+export default function calculateWinState(board: BoardState): WinState {
     for (const winningPattern of winningPatterns) {
         const [indexA, indexB, indexC] = winningPattern;
         const firstCell = board[indexA];

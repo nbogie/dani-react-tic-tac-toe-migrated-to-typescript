@@ -1,38 +1,20 @@
 import { useState } from "react";
 import "./index.css";
-import checkWinner from "./WinningPatterns";
+import calculateWinState from "./WinningPatterns";
 
 export type CellState = null | "x" | "o";
 export type BoardState = CellState[];
 
 export default function TicTacToe() {
-    const initialBoardState: BoardState = [
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-    ];
+    // prettier-ignore
+    const initialBoardState: BoardState = [ null, null, null, null, null, null, null, null, null];
 
-    const exampleBoardState: BoardState = [
-        "o",
-        "x",
-        "o",
-        "x",
-        "o",
-        "x",
-        "x",
-        "o",
-        null,
-    ];
+    // prettier-ignore
+    const exampleBoardState: BoardState = [ "o", "x", "o", "x", "o", "x", "x", "o", null];
 
-    const [boardState, setBoardState] = useState(exampleBoardState);
+    const [boardState, setBoardState] = useState<BoardState>(exampleBoardState);
 
-    function whoseTurnIsIt() {
+    function whoseTurnIsIt(): "x" | "o" {
         const numXs = boardState.filter((element) => element === "x").length;
         const numOs = boardState.filter((element) => element === "o").length;
 
@@ -42,11 +24,6 @@ export default function TicTacToe() {
             return "x";
         }
     }
-
-    /**
-     * @param {CellState[]} inputArray
-     * @returns
-     */
 
     function createGridCellDivs(inputArray: BoardState) {
         const arrayOfDivs = inputArray.map((cellState, index) => {
@@ -105,7 +82,7 @@ export default function TicTacToe() {
         setBoardState(initialBoardState);
     }
 
-    const winState = checkWinner(boardState);
+    const winState = calculateWinState(boardState);
     const isGameOver = winState.outcome !== "in-play";
 
     return (
