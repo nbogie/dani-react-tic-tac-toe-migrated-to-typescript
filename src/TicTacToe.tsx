@@ -10,9 +10,9 @@ export default function TicTacToe() {
     const initialBoardState: BoardState = [ null, null, null, null, null, null, null, null, null];
 
     // prettier-ignore
-    const exampleBoardState: BoardState = [ "o", "x", "o", "x", "o", "x", "x", "o", null];
+    const exampleDrawBoardState: BoardState = ["x", "o", "o", "o", "x", "x", "o", "x", "o"];
 
-    const [boardState, setBoardState] = useState<BoardState>(exampleBoardState);
+    const [boardState, setBoardState] = useState<BoardState>(initialBoardState);
 
     function whoseTurnIsIt(): "x" | "o" {
         const numXs = boardState.filter((element) => element === "x").length;
@@ -82,6 +82,10 @@ export default function TicTacToe() {
         setBoardState(initialBoardState);
     }
 
+    function loadDrawBoardState() {
+        setBoardState(exampleDrawBoardState);
+    }
+
     const winState = calculateWinState(boardState);
     const isGameOver = winState.outcome !== "in-play";
 
@@ -102,6 +106,7 @@ export default function TicTacToe() {
             <div className="resetButton">
                 <button onClick={resetBoardState}>reset</button>
                 <button onClick={copyBoardState}>copy game state</button>
+                <button onClick={loadDrawBoardState}>load draw state</button>
             </div>
         </div>
     );
