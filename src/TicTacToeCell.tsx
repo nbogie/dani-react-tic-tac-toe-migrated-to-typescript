@@ -1,3 +1,4 @@
+import { emojiForCellState } from "./emojiForCellState";
 import { CellState } from "./gameTypes";
 
 export function TicTacToeCell(props: {
@@ -11,8 +12,4 @@ export function TicTacToeCell(props: {
             {emojiForCellState(cellState)}
         </div>
     );
-}
-function emojiForCellState(cellState: CellState): string {
-    const lookup = { x: "🏴‍☠️", o: "😇" };
-    return cellState === null ? "" : lookup[cellState];
 }

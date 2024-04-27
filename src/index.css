@@ -58,3 +58,11 @@ button {
 .stateButtons > button {
     font-size: 1rem;
 }
+
+.winner {
+    font-size: 10rem;
+}
+
+.draw {
+    white-space: nowrap;
+}

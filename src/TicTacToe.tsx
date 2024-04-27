@@ -1,8 +1,12 @@
+//Disable buttons on game over
+//TODO: highlight the win cells
+
 import { useState } from "react";
 import "./index.css";
 import { calculateWinState } from "./WinningPatterns";
 import { TicTacToeCell } from "./TicTacToeCell";
 import { BoardState } from "./gameTypes";
+import { GameOverOverlay } from "./GameOverOverlay";
 
 export default function TicTacToe() {
     // prettier-ignore
@@ -54,15 +58,7 @@ export default function TicTacToe() {
     return (
         <div className="gameContainer">
             <div className="gameGrid">
-                {isGameOver && (
-                    <div className="gameOver">
-                        {winState.outcome === "draw" ? (
-                            "draw"
-                        ) : (
-                            <div className="winner">{winState.winner}</div>
-                        )}
-                    </div>
-                )}
+                {isGameOver && <GameOverOverlay winState={winState} />}
 
                 {boardState.map((cellState, cellIndex) => (
                     <TicTacToeCell

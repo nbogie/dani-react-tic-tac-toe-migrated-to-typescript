@@ -19,7 +19,6 @@ export type WinState =
     | { outcome: "draw" }
     | { outcome: "in-play" }
     | { outcome: "win"; winner: "x" | "o" };
-
 export function calculateWinState(board: BoardState): WinState {
     for (const winningPattern of winningPatterns) {
         const [indexA, indexB, indexC] = winningPattern;
