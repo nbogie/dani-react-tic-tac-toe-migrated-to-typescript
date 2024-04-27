@@ -1,9 +1,8 @@
 import { useState } from "react";
 import "./index.css";
-import calculateWinState from "./WinningPatterns";
-
-export type CellState = null | "x" | "o";
-export type BoardState = CellState[];
+import { calculateWinState } from "./WinningPatterns";
+import { TicTacToeCell } from "./TicTacToeCell";
+import { BoardState } from "./gameTypes";
 
 export default function TicTacToe() {
     // prettier-ignore
@@ -23,26 +22,6 @@ export default function TicTacToe() {
         } else {
             return "x";
         }
-    }
-
-    function createGridCellDivs(inputArray: BoardState): JSX.Element[] {
-        const arrayOfDivs = inputArray.map((cellState, cellIndex) => {
-            return (
-                <div
-                    key={cellIndex}
-                    className="cell"
-                    onClick={() => handleClickCell(cellIndex)}
-                >
-                    {emojiForCellState(cellState)}
-                </div>
-            );
-        });
-        return arrayOfDivs;
-    }
-
-    function emojiForCellState(cellState: CellState): string {
-        const lookup = { x: "🏴‍☠️", o: "😇" };
-        return cellState === null ? "" : lookup[cellState];
     }
 
     function handleClickCell(cellIndex: number) {
@@ -84,7 +63,14 @@ export default function TicTacToe() {
                         )}
                     </div>
                 )}
-                {createGridCellDivs(boardState)}
+
+                {boardState.map((cellState, cellIndex) => (
+                    <TicTacToeCell
+                        key={cellIndex}
+                        cellState={cellState}
+                        handleClickCell={() => handleClickCell(cellIndex)}
+                    />
+                ))}
             </div>
             <div className="resetButton">
                 <button onClick={resetBoardState}>reset</button>

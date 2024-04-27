@@ -1,9 +1,10 @@
-import { BoardState } from "./TicTacToe";
+import { BoardState } from "./gameTypes";
 
+type CellIndex = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8;
 /**
  * array of tuples of three board indices, each describing a line on the board
  */
-const winningPatterns: [number, number, number][] = [
+const winningPatterns: [CellIndex, CellIndex, CellIndex][] = [
     [0, 1, 2],
     [3, 4, 5],
     [6, 7, 8], // Rows
@@ -19,12 +20,14 @@ export type WinState =
     | { outcome: "in-play" }
     | { outcome: "win"; winner: "x" | "o" };
 
-export default function calculateWinState(board: BoardState): WinState {
+export function calculateWinState(board: BoardState): WinState {
     for (const winningPattern of winningPatterns) {
         const [indexA, indexB, indexC] = winningPattern;
-        const firstCell = board[indexA];
-        const secondCell = board[indexB];
-        const thirdCell = board[indexC];
+        const [firstCell, secondCell, thirdCell] = [
+            board[indexA],
+            board[indexB],
+            board[indexC],
+        ];
 
         const isMatchingLine =
             firstCell !== null &&
