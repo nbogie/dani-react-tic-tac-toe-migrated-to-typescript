@@ -55,3 +55,13 @@ button {
     padding: 3rem;
     border-radius: 0.5rem;
 }
+
+.stateButtons {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.stateButtons > button {
+    font-size: 1rem;
+}

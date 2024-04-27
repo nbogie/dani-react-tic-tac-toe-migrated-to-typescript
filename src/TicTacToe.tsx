@@ -105,8 +105,10 @@ export default function TicTacToe() {
             <div className="gameGrid">{createGridCellDivs(boardState)}</div>
             <div className="resetButton">
                 <button onClick={resetBoardState}>reset</button>
-                <button onClick={copyBoardState}>copy game state</button>
-                <button onClick={loadDrawBoardState}>load draw state</button>
+            </div>
+            <div className="stateButtons">
+                <button onClick={copyBoardState}>copy state</button>
+                <button onClick={loadDrawBoardState}>load draw</button>
             </div>
         </div>
     );
