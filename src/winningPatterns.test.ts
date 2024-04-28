@@ -23,6 +23,10 @@ test("should return details of winner", () => {
     const inPlayBoard : BoardState = [ "x", "x", "x", null, null, null, null, null, null, ];
 
     const result = calculateWinState(inPlayBoard);
-    const expectedResult: WinState = { outcome: "win", winner: "x" };
+    const expectedResult: WinState = {
+        outcome: "win",
+        winner: "x",
+        winningLine: [0, 1, 2],
+    };
     expect(result).toEqual(expectedResult);
 });

@@ -1,6 +1,6 @@
 import { BoardState } from "./gameTypes";
 
-type CellIndex = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8;
+export type CellIndex = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8;
 /**
  * array of tuples of three board indices, each describing a line on the board
  */
@@ -18,7 +18,12 @@ const winningPatterns: [CellIndex, CellIndex, CellIndex][] = [
 export type WinState =
     | { outcome: "draw" }
     | { outcome: "in-play" }
-    | { outcome: "win"; winner: "x" | "o" };
+    | {
+          outcome: "win";
+          winner: "x" | "o";
+          winningLine: [CellIndex, CellIndex, CellIndex];
+      };
+
 export function calculateWinState(board: BoardState): WinState {
     for (const winningPattern of winningPatterns) {
         const [indexA, indexB, indexC] = winningPattern;
@@ -34,7 +39,11 @@ export function calculateWinState(board: BoardState): WinState {
             firstCell === thirdCell;
 
         if (isMatchingLine) {
-            return { outcome: "win", winner: firstCell };
+            return {
+                outcome: "win",
+                winner: firstCell,
+                winningLine: winningPattern,
+            };
         }
     }
 

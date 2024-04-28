@@ -3,7 +3,7 @@
 
 import { useState } from "react";
 import "./index.css";
-import { calculateWinState } from "./WinningPatterns";
+import { CellIndex, calculateWinState } from "./WinningPatterns";
 import { TicTacToeCell } from "./TicTacToeCell";
 import { BoardState } from "./gameTypes";
 import { GameOverOverlay } from "./GameOverOverlay";
@@ -64,13 +64,23 @@ export default function TicTacToe() {
             <div className="gameGrid">
                 {isGameOver && <GameOverOverlay winState={winState} />}
 
-                {boardState.map((cellState, cellIndex) => (
-                    <TicTacToeCell
-                        key={cellIndex}
-                        cellState={cellState}
-                        handleClickCell={() => handleClickCell(cellIndex)}
-                    />
-                ))}
+                {boardState.map((cellState, cellIndex) => {
+                    const isHighlit =
+                        winState.outcome !== "win"
+                            ? false
+                            : winState.winningLine.includes(
+                                  cellIndex as CellIndex
+                              );
+
+                    return (
+                        <TicTacToeCell
+                            key={cellIndex}
+                            cellState={cellState}
+                            isHighlit={isHighlit}
+                            handleClickCell={() => handleClickCell(cellIndex)}
+                        />
+                    );
+                })}
             </div>
             <div className="resetButton">
                 <button onClick={resetBoardState}>reset</button>
