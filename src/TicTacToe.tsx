@@ -1,4 +1,4 @@
-//TODO: highlight the win cells
+//Done: highlight the win cells
 //Done: Disable buttons on game over
 
 import { useState } from "react";
